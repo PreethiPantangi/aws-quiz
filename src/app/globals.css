@@ -3,25 +3,84 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --light-background: #ffffff;
+  --dark-foreground: #000000;
+  --dark-background: #000000;
+  --light-foreground: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --light-background: #ffffff;
+    --dark-foreground: #000000;
+    --dark-background: #000000;
+    --light-foreground: #ffffff;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
+html, body {
+  height: 100%;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+body.light {
+  color: var(--dark-foreground);
+  background: var(--light-background);
+}
+
+body.dark {
+  color: var(--light-foreground);
+  background: var(--dark-background);
+}
+
+main {
+  flex-grow: 1; /* Allow main to grow and fill available space */
 }
 
 @layer utilities {
   .text-balance {
-    text-wrap: balance;
+    text-wrap: balance; /* Optional text wrapping */
+  }
+
+  @variants responsive {
+    /* Show scrollbar for Chrome, Safari, and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      width: 10px; /* Set scrollbar width */
+      background: transparent; /* Remove background of scrollbar */
+    }
+
+    /* Scrollbar thumb styles */
+    .no-scrollbar::-webkit-scrollbar-thumb {
+      border-radius: 5px; /* Rounded edges */
+    }
+
+    /* Track styles */
+    .no-scrollbar::-webkit-scrollbar-track {
+      background: transparent; /* Transparent track */
+    }
+
+    /* Hide scrollbar for IE, Edge, and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: thin; /* Set scrollbar width for Firefox */
+      scrollbar-color: none transparent; /* Set scrollbar thumb and track color for Firefox */
+    }
+
+    /* Custom scrollbar for light theme */
+    .no-scrollbar.light-theme::-webkit-scrollbar-thumb {
+      background-color: black; /* Thumb color for light theme */
+      scrollbar-color: black transparent; /* Set scrollbar thumb and track color for Firefox */
+    }
+
+    /* Custom scrollbar for dark theme */
+    .no-scrollbar.dark-theme::-webkit-scrollbar-thumb {
+      background-color: white; /* Thumb color for dark theme */
+      scrollbar-color: white transparent; /* Set scrollbar thumb and track color for Firefox */
+    }
   }
 }
