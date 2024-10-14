@@ -51,7 +51,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Sthithapragna's YouTube Channel.
+              Sthithapragn&apos;s YouTube Channel.
             </a>
           </div>
           <div className="mb-2  justify-evenly">
