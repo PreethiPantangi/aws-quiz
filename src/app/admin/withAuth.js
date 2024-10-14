@@ -1,11 +1,14 @@
+'use client';
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 const withAuth = (WrappedComponent) => {
-    const withAuthComponent = (props) => {
+
+    const WithAuthComponent = (props) => {
+
         const router = useRouter();
-    
+        
         useEffect(() => {
             const accessToken = localStorage.getItem('access_token'); // or your preferred method to get the token
             if (!accessToken) {
@@ -13,13 +16,13 @@ const withAuth = (WrappedComponent) => {
             } else {
                 router.push('/admin/dashboard');
             }
-        }, []);
+        }, [router]);
 
         return <WrappedComponent {...props} />;
     }
     
-    withAuthComponent.displayName = `WithAuth(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
-    return withAuthComponent;
+    WithAuthComponent.displayName = `WithAuth(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
+    return WithAuthComponent;
 };
 
 export default withAuth;
